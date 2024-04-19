@@ -6,8 +6,8 @@ export class PedidosRepository implements CrearPedidoInterface {
     async  sendPedidos(pedidos: Pedidos): Promise<boolean> {
          try {
             const channel = await coneccToRabbitMQ();
-            await channel.sendToQueue('pedidos', Buffer.from(JSON.stringify({message: 'Pedido creado', pedidos})));
-            console.log('Pedido enviado a RabbitMQ', pedidos);
+            await channel.sendToQueue('pedidos', Buffer.from(JSON.stringify({message: 'Pedido enviado', pedidos})));
+            console.log('RabbitMQ', pedidos);
             await channel.close();
             return true;
          } catch ( error ){
